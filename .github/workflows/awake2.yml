@@ -1,0 +1,26 @@
+name: Awake Service 3-4
+
+on:
+  schedule:
+    cron: "*/30 * 17-31 * *"
+
+jobs:
+  heroku-deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        services:
+        - service: 3
+          url: "https://allprivatekeys-v2-3.herokuapp.com/"
+        - service: 4
+          url: "https://allprivatekeys-v2-4.herokuapp.com/"
+        
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Waking up Heroku Service ${{ matrix.services.service }}
+      uses: mikeesto/heroku-awake@1.0.0
+      with:
+        URL: ${{ matrix.services.url }}
