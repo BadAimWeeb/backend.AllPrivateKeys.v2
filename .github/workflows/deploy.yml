@@ -11,44 +11,44 @@ jobs:
       matrix:
         services:
         - service: 1
-          api: ${{ secrets.HEROKU_API_KEY_1 }}
-          email: ${{ secrets.HEROKU_EMAIL_1 }}
-          name: ${{ secrets.HEROKU_APP_NAME_1 }}
+          api: "${{ secrets.HEROKU_API_KEY_1 }}"
+          email: "${{ secrets.HEROKU_EMAIL_1 }}"
+          name: "${{ secrets.HEROKU_APP_NAME_1 }}"
           roles: always online from 1-16
         - service: 2
-          api: ${{ secrets.HEROKU_API_KEY_2 }}
-          email: ${{ secrets.HEROKU_EMAIL_2 }}
-          name: ${{ secrets.HEROKU_APP_NAME_2 }}
+          api: "${{ secrets.HEROKU_API_KEY_2 }}"
+          email: "${{ secrets.HEROKU_EMAIL_2 }}"
+          name: "${{ secrets.HEROKU_APP_NAME_2 }}"
           roles: always online from 1-16
         - service: 3
-          api: ${{ secrets.HEROKU_API_KEY_3 }}
-          email: ${{ secrets.HEROKU_EMAIL_3 }}
-          name: ${{ secrets.HEROKU_APP_NAME_3 }}
+          api: "${{ secrets.HEROKU_API_KEY_3 }}"
+          email: "${{ secrets.HEROKU_EMAIL_3 }}"
+          name: "${{ secrets.HEROKU_APP_NAME_3 }}"
           roles: always online from 17-31
         - service: 4
-          api: ${{ secrets.HEROKU_API_KEY_4 }}
-          email: ${{ secrets.HEROKU_EMAIL_4 }}
-          name: ${{ secrets.HEROKU_APP_NAME_4 }}
+          api: "${{ secrets.HEROKU_API_KEY_4 }}"
+          email: "${{ secrets.HEROKU_EMAIL_4 }}"
+          name: "${{ secrets.HEROKU_APP_NAME_4 }}"
           roles: always online from 17-31
         - service: 5
-          api: ${{ secrets.HEROKU_API_KEY_5 }}
-          email: ${{ secrets.HEROKU_EMAIL_5 }}
-          name: ${{ secrets.HEROKU_APP_NAME_5 }}
+          api: "${{ secrets.HEROKU_API_KEY_5 }}"
+          email: "${{ secrets.HEROKU_EMAIL_5 }}"
+          name: "${{ secrets.HEROKU_APP_NAME_5 }}"
           roles: fallback
         - service: 6
-          api: ${{ secrets.HEROKU_API_KEY_6 }}
-          email: ${{ secrets.HEROKU_EMAIL_6 }}
-          name: ${{ secrets.HEROKU_APP_NAME_6 }}
+          api: "${{ secrets.HEROKU_API_KEY_6 }}"
+          email: "${{ secrets.HEROKU_EMAIL_6 }}"
+          name: "${{ secrets.HEROKU_APP_NAME_6 }}"
           roles: fallback
         - service: 7
-          api: ${{ secrets.HEROKU_API_KEY_7 }}
-          email: ${{ secrets.HEROKU_EMAIL_7 }}
-          name: ${{ secrets.HEROKU_APP_NAME_7 }}
+          api: "${{ secrets.HEROKU_API_KEY_7 }}"
+          email: "${{ secrets.HEROKU_EMAIL_7 }}"
+          name: "${{ secrets.HEROKU_APP_NAME_7 }}"
           roles: fallback
         - service: 8
-          api: ${{ secrets.HEROKU_API_KEY_8 }}
-          email: ${{ secrets.HEROKU_EMAIL_8 }}
-          name: ${{ secrets.HEROKU_APP_NAME_8 }}
+          api: "${{ secrets.HEROKU_API_KEY_8 }}"
+          email: "${{ secrets.HEROKU_EMAIL_8 }}"
+          name: "${{ secrets.HEROKU_APP_NAME_8 }}"
           roles: fallback
         
     steps:
