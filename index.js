@@ -1,5 +1,6 @@
 (async () => {
     process.on("uncaughtException", console.log);
+    process.on("unhandledRejection", console.log);
 
     const io = require("socket.io");
     const express = require("express");
@@ -22,6 +23,11 @@
                 res.status(400).setHeader("Access-Control-Allow-Origin", "*");
                 return res.json({ error: "mode not supported" });
         }
+    });
+    
+    app.get("/", (res) => {
+        res.status(200).setHeader("Access-Control-Allow-Origin", "*");
+        return res.json("AllPrivateKeys v2 Resolver Service - i1");
     });
 
     const server = http.createServer(app);
