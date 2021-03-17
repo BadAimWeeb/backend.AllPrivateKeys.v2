@@ -24,8 +24,8 @@
                 return res.json({ error: "mode not supported" });
         }
     });
-    
-    app.get("/", (res) => {
+
+    app.get("/", (req, res) => {
         res.status(200).setHeader("Access-Control-Allow-Origin", "*");
         return res.json("AllPrivateKeys v2 Resolver Service - i1");
     });
