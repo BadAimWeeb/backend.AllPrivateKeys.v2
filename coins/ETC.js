@@ -1,4 +1,4 @@
-const MAX_PRIVATE_KEY = 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffn;
+const MAX_PRIVATE_KEY = 0xfffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364140n;
 const WSURL = "wss://www.ethercluster.com/ws-etc";
 
 const Web3 = require("web3");
