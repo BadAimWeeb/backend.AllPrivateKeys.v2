@@ -1,6 +1,7 @@
 const MAX_PRIVATE_KEY = 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffn;
-const BTC = require("bitcoinjs-lib");
 const fetch = require("node-fetch");
+
+const { getAddress } = require("./support/TRX");
 
 /** Generates BigInts between low (inclusive) and high (exclusive) */
 function generateRandomBigInt(lowBigInt, highBigInt) {
@@ -26,8 +27,8 @@ function generateRandomBigInt(lowBigInt, highBigInt) {
 
 module.exports = async () => {
     return {
-        short: "BTC",
-        name: "Bitcoin",
+        short: "TRX",
+        name: "TRON",
         pageHandler: async (page, count) => {
             if (count > 100 || count <= 0) return null;
 
@@ -40,50 +41,40 @@ module.exports = async () => {
                 p = generateRandomBigInt(1n, (MAX_PRIVATE_KEY / BigInt(count)));
             }
 
-            let w3pbp = {};
             for (let i = 0; i < count; i++) {
                 let private = ((p - 1n) * BigInt(count)) + 1n + BigInt(i);
                 if (private > MAX_PRIVATE_KEY) break;
-                let privateString = private.toString(16).padStart(64, "0");
-                let privateBuffer = Buffer.from(privateString, "hex");
+                let privateKey = private.toString(16).padStart(64, "0");
 
-                let ec = BTC.ECPair.fromPrivateKey(privateBuffer);
+                let address = getAddress(privateKey);
 
                 rows.push(new Promise(async r => {
-                    let rp = () => {};
-                    let rData = new Promise(x => { rp = x; });1
+                    let j = await (await fetch(`https://apilist.tronscan.org/api/account?address=${address}`)).json();
 
-                    let address = BTC.payments.p2pkh({ pubkey: ec.publicKey }).address;
-                    w3pbp[address] = rp;
+                    let formattedBalance = "";
+                    {
+                        let paddedBalance = j.balance.toString().padStart(7, "0");
+                        let tr = paddedBalance.slice(0, -6);
+                        let frac = paddedBalance.slice(-6);
 
-                    let r3 = await rData;
-
-                    let formattedBalance = (r3.balance / 1e+8).toFixed(8);
-                    let txn = r3.txn;
+                        formattedBalance = tr + "." + frac;
+                    }
+                    let txn = j.totalTransactionCount;
 
                     r([
                         (i + 1) + ".",
-                        ec.toWIF(),
-                        `<a href="https://www.blockchain.com/btc/address/${address}" target="_blank">${address}</a>`,
+                        privateKey,
+                        `<a href="https://tronscan.org/#/address/${address}" target="_blank">${address}</a>`,
                         formattedBalance,
                         txn.toString()
                     ]);
                 }));
             }
 
-            let url = `https://blockchain.info/multiaddr?n=0&active=${encodeURIComponent(Object.keys(w3pbp).join("|"))}`;
-            let r = await (await fetch(url)).json();
-            for (let a of r.addresses) {
-                w3pbp[a.address]({
-                    balance: a.final_balance,
-                    txn: a.n_tx
-                });
-            }
-
             return {
                 header: [
                     "No.",
-                    "WIF/Private key",
+                    "Private key",
                     "Address",
                     "Balance",
                     "TX.n"

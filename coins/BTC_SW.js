@@ -1,9 +1,6 @@
-// https://blockchain.info/multiaddr?active=12dRugNcdxK39288NjcDV4GX7rMsKCGn6B|35nFvZzhjpm6zXbM7CUGLavFG9kKvLabBi&n=0
-
 const MAX_PRIVATE_KEY = 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffn;
 const BTC = require("bitcoinjs-lib");
 const fetch = require("node-fetch");
-const crypto = require("crypto");
 
 /** Generates BigInts between low (inclusive) and high (exclusive) */
 function generateRandomBigInt(lowBigInt, highBigInt) {
