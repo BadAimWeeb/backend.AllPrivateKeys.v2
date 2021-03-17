@@ -1,4 +1,4 @@
-const MAX_PRIVATE_KEY = 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffn;
+const MAX_PRIVATE_KEY = 0xfffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd036413fn;
 const BTC = require("bitcoinjs-lib");
 const fetch = require("node-fetch");
 

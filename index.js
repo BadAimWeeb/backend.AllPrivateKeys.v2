@@ -7,7 +7,7 @@
     const http = require("http");
 
     const supportedCoins = await Promise.all(
-        ["BTC", "BTC_SW", "ETH", "ETC", "TRX"]
+        ["BTC", "BTC_SW", "ETH", "ETC", "TRX", "USDT_TRX"]
             .map(x => require("./coins/" + x)())
     );
 
@@ -27,7 +27,7 @@
 
     app.get("/", (req, res) => {
         res.status(200).setHeader("Access-Control-Allow-Origin", "*");
-        return res.json("AllPrivateKeys v2 Resolver Service - i2");
+        return res.json("AllPrivateKeys v2 Resolver Service - i3");
     });
 
     const server = http.createServer(app);
