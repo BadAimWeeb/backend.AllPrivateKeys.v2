@@ -49,7 +49,13 @@ module.exports = async () => {
                 let address = getAddress(privateKey);
 
                 rows.push(new Promise(async r => {
-                    let j = await (await fetch(`https://apilist.tronscan.org/api/account?address=${address}`)).json();
+                    let j;
+                    for (; ;) {
+                        try {
+                            j = await (await fetch(`https://apilist.tronscan.org/api/account?address=${address}`)).json();
+                            break;
+                        } catch {}
+                    }
 
                     let token = j.tokens.find(t => t.tokenId === "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t") ?? { balance: 0 };
                     let formattedBalance = "";

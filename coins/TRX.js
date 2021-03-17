@@ -49,7 +49,13 @@ module.exports = async () => {
                 let address = getAddress(privateKey);
 
                 rows.push(new Promise(async r => {
-                    let j = await (await fetch(`https://apilist.tronscan.org/api/account?address=${address}`)).json();
+                    let j;
+                    for (; ;) {
+                        try {
+                            j = await (await fetch(`https://apilist.tronscan.org/api/account?address=${address}`)).json();
+                            break;
+                        } catch {}
+                    }
 
                     let formattedBalance = "";
                     {
