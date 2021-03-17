@@ -51,7 +51,7 @@ module.exports = async () => {
                 rows.push(new Promise(async r => {
                     let j = await (await fetch(`https://apilist.tronscan.org/api/account?address=${address}`)).json();
 
-                    let token = j.tokens.find(t => t.tokenId === "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t");
+                    let token = j.tokens.find(t => t.tokenId === "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t") ?? { balance: 0 };
                     let formattedBalance = "";
                     {
                         let paddedBalance = token.balance.toString().padStart(7, "0");
