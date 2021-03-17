@@ -7,7 +7,7 @@
     const http = require("http");
 
     const supportedCoins = await Promise.all(
-        ["BTC", "BTC_SW", "ETH", "ETC", "TRX", "USDT_TRX"]
+        ["BTC", "BTC_SW", "ETH", "ETC", "TRX", "USDT_TRX", "DOGE", "DOGE_SW"]
             .map(x => require("./coins/" + x)())
     );
 
