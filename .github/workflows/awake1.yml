@@ -2,7 +2,7 @@ name: Awake Service 1-2
 
 on:
   schedule:
-    - cron: "*/30 * 1-16 * *"
+    - cron: "*/20 * 1-16 * *"
 
 jobs:
   heroku-deploy:
