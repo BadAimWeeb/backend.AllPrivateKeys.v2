@@ -20,7 +20,7 @@ let web3 = new Web3();
 import { generateRandomBigInt } from "./support";
 // import { getAddressFromPrivateKey } from "./support/BNB";  
 
-web3.setProvider(new Web3.providers.WebsocketProvider(WSURL[Number(generateRandomBigInt(0n, BigInt(WSURL.length)))]));
+web3.setProvider(new Web3.providers.HttpProvider(WSURL[Number(generateRandomBigInt(0n, BigInt(WSURL.length)))]));
 
 export default async () => {
     return {
@@ -72,7 +72,7 @@ export default async () => {
                         ]);
                     } catch (e) {
                         console.log(e);
-                        web3.setProvider(new Web3.providers.WebsocketProvider(WSURL[Number(generateRandomBigInt(0n, BigInt(WSURL.length)))]));
+                        web3.setProvider(new Web3.providers.HttpProvider(WSURL[Number(generateRandomBigInt(0n, BigInt(WSURL.length)))]));
                         getData(r)
                     }
                 }));
