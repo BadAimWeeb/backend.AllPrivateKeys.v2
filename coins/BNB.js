@@ -18,7 +18,7 @@ import Web3 from "web3";
 let web3 = new Web3();
 
 import { generateRandomBigInt } from "./support";
-import { getAddressFromPrivateKey } from "./support/BNB";  
+// import { getAddressFromPrivateKey } from "./support/BNB";  
 
 web3.setProvider(new Web3.providers.WebsocketProvider(WSURL[Number(generateRandomBigInt(0n, BigInt(WSURL.length)))]));
 
@@ -43,7 +43,9 @@ export default async () => {
                 if (privateKey > MAX_PRIVATE_KEY) break;
                 let privateString = privateKey.toString(16).padStart(64, "0");
 
-                let address = getAddressFromPrivateKey(privateString);
+                //let address = getAddressFromPrivateKey(privateString);
+                let account = web3.eth.accounts.privateKeyToAccount(privateString);
+                let address = account.address;
 
                 rows.push(new Promise(async function getData(r) {
                     try {
