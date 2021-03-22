@@ -1,10 +1,10 @@
 const MAX_PRIVATE_KEY = 0xfffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364140n;
 const WSURL = "wss://mainnet.infura.io/ws/v3/67f1c4a06fa74fc18e722b748cf0348a";
 
-import Web3, { providers } from "web3";
+import Web3 from "web3";
 let web3 = new Web3();
 
-web3.setProvider(new providers.WebsocketProvider(WSURL));
+web3.setProvider(new Web3.providers.WebsocketProvider(WSURL));
 
 import { generateRandomBigInt } from "./support";
 
@@ -25,9 +25,9 @@ export default async () => {
             }
 
             for (let i = 0; i < count; i++) {
-                let private = ((p - 1n) * BigInt(count)) + 1n + BigInt(i);
-                if (private > MAX_PRIVATE_KEY) break;
-                let privateString = private.toString(16).padStart(64, "0");
+                let privateKey = ((p - 1n) * BigInt(count)) + 1n + BigInt(i);
+                if (privateKey > MAX_PRIVATE_KEY) break;
+                let privateString = privateKey.toString(16).padStart(64, "0");
 
                 let account = web3.eth.accounts.privateKeyToAccount(privateString);
                 let address = account.address;
@@ -56,7 +56,7 @@ export default async () => {
                             ar[1].toString()
                         ]);
                     } catch {
-                        web3.setProvider(new providers.WebsocketProvider(WSURL));
+                        web3.setProvider(new Web3.providers.WebsocketProvider(WSURL));
                         getData(r)
                     }
                 }));

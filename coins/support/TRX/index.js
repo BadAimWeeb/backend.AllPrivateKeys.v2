@@ -1,13 +1,14 @@
 import crypto from "crypto";
-import { keccak_256 } from "js-sha3";
+import sha3 from "js-sha3";
+const { keccak_256 } = sha3;
 import { encode58 } from "./base58";
 
 const ADDRESS_PREFIX = '41'
 
-export const generateKeys = private => {
+export const generateKeys = privateKey => {
     const ecdh = crypto.createECDH('secp256k1');
-    if (private) {
-        ecdh.setPrivateKey(private, "hex");
+    if (privateKey) {
+        ecdh.setPrivateKey(privateKey, "hex");
     } else {
         ecdh.generateKeys();
     }
@@ -35,8 +36,8 @@ export const getBase58CheckAddress = address => {
 
 export const sha256 = msg => crypto.createHash('sha256').update(Buffer.from(msg, 'hex')).digest('hex');
 
-export const getAddress = private => {
-    let { publicKey } = generateKeys(private);
+export const getAddress = privateKey => {
+    let { publicKey } = generateKeys(privateKey);
     let addressBytes = computeAddress(publicKey);
 
     return getBase58CheckAddress(addressBytes);

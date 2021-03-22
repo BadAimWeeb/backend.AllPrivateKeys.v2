@@ -1,7 +1,8 @@
 const PRIVKEY_LEN = 32;
 const CURVE = "secp256k1";
 
-import { ec as EC } from "elliptic";
+import elliptic from "elliptic";
+const { ec: EC } = elliptic;
 import { ab2hexstring, sha256ripemd160 } from "./utils.js";
 import bech32 from "bech32";
 

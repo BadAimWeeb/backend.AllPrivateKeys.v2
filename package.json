@@ -1,10 +1,10 @@
 {
   "name": "apkeyserverv2",
-  "version": "2.5.1",
+  "version": "2.5.2",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node --experimental-specifier-resolution=node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -23,5 +23,8 @@
   "engines": {
     "node": ">=15"
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "eslint": "^7.22.0"
+  }
 }

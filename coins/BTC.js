@@ -22,9 +22,9 @@ export default async () => {
 
             let w3pbp = {};
             for (let i = 0; i < count; i++) {
-                let private = ((p - 1n) * BigInt(count)) + 1n + BigInt(i);
-                if (private > MAX_PRIVATE_KEY) break;
-                let privateString = private.toString(16).padStart(64, "0");
+                let privateKey = ((p - 1n) * BigInt(count)) + 1n + BigInt(i);
+                if (privateKey > MAX_PRIVATE_KEY) break;
+                let privateString = privateKey.toString(16).padStart(64, "0");
                 let privateBuffer = Buffer.from(privateString, "hex");
 
                 let ec = BTC.ECPair.fromPrivateKey(privateBuffer);

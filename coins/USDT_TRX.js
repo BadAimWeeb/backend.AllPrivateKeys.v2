@@ -21,11 +21,11 @@ export default async () => {
             }
 
             for (let i = 0; i < count; i++) {
-                let private = ((p - 1n) * BigInt(count)) + 1n + BigInt(i);
-                if (private > MAX_PRIVATE_KEY) break;
-                let privateKey = private.toString(16).padStart(64, "0");
+                let privateKey = ((p - 1n) * BigInt(count)) + 1n + BigInt(i);
+                if (privateKey > MAX_PRIVATE_KEY) break;
+                let privateString = privateKey.toString(16).padStart(64, "0");
 
-                let address = getAddress(privateKey);
+                let address = getAddress(privateString);
 
                 rows.push(new Promise(async r => {
                     let j;
@@ -48,7 +48,7 @@ export default async () => {
 
                     r([
                         (i + 1) + ".",
-                        privateKey,
+                        privateString,
                         `<a href="https://tronscan.org/#/address/${address}" target="_blank">${address}</a>`,
                         formattedBalance
                     ]);

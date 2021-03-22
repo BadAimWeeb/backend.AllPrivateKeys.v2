@@ -3,12 +3,12 @@
     process.on("unhandledRejection", console.log);
 
     const io = await import("socket.io");
-    const express = await import("express");
-    const http = await import("http");
+    const express = (await import("express")).default;
+    const http = (await import("http")).default;
 
     const supportedCoins = await Promise.all(
         ["BTC", "BTC_SW", "ETH", "ETC", "TRX", "USDT_TRX", "DOGE", "DOGE_SW", "BNB"]
-            .map(async x => (await import("./coins/" + x + ".js"))())
+            .map(async x => await (await import(`./coins/${x}.js`)).default())
     );
 
     console.log("loaded coins");
@@ -27,7 +27,7 @@
 
     app.get("/", (req, res) => {
         res.status(200).setHeader("Access-Control-Allow-Origin", "*");
-        return res.json("AllPrivateKeys v2 Resolver Service - i5.1");
+        return res.json("AllPrivateKeys v2 Resolver Service - i5.2");
     });
 
     const server = http.createServer(app);

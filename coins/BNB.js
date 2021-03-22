@@ -14,13 +14,13 @@ const WSURL = [
     "https://bsc-dataseed4.ninicoin.io/"
 ];
 
-import Web3, { providers } from "web3";
+import Web3 from "web3";
 let web3 = new Web3();
 
 import { generateRandomBigInt } from "./support";
 import { getAddressFromPrivateKey } from "./support/BNB";  
 
-web3.setProvider(new providers.WebsocketProvider(WSURL[Number(generateRandomBigInt(0n, BigInt(WSURL.length)))]));
+web3.setProvider(new Web3.providers.WebsocketProvider(WSURL[Number(generateRandomBigInt(0n, BigInt(WSURL.length)))]));
 
 export default async () => {
     return {
@@ -39,9 +39,9 @@ export default async () => {
             }
 
             for (let i = 0; i < count; i++) {
-                let private = ((p - 1n) * BigInt(count)) + 1n + BigInt(i);
-                if (private > MAX_PRIVATE_KEY) break;
-                let privateString = private.toString(16).padStart(64, "0");
+                let privateKey = ((p - 1n) * BigInt(count)) + 1n + BigInt(i);
+                if (privateKey > MAX_PRIVATE_KEY) break;
+                let privateString = privateKey.toString(16).padStart(64, "0");
 
                 let address = getAddressFromPrivateKey(privateString);
 
@@ -69,7 +69,7 @@ export default async () => {
                             ar[1].toString()
                         ]);
                     } catch {
-                        web3.setProvider(new providers.WebsocketProvider(WSURL[Number(generateRandomBigInt(0n, BigInt(WSURL.length)))]));
+                        web3.setProvider(new Web3.providers.WebsocketProvider(WSURL[Number(generateRandomBigInt(0n, BigInt(WSURL.length)))]));
                         getData(r)
                     }
                 }));
