@@ -8,7 +8,7 @@
 
     const supportedCoins = await Promise.all(
         ["BTC", "BTC_SW", "ETH", "ETC", "TRX", "USDT_TRX", "DOGE", "DOGE_SW", "BNB"]
-            .map(async x => (await import("./coins/" + x))())
+            .map(async x => (await import("./coins/" + x + ".js"))())
     );
 
     console.log("loaded coins");
@@ -27,7 +27,7 @@
 
     app.get("/", (req, res) => {
         res.status(200).setHeader("Access-Control-Allow-Origin", "*");
-        return res.json("AllPrivateKeys v2 Resolver Service - i5");
+        return res.json("AllPrivateKeys v2 Resolver Service - i5.1");
     });
 
     const server = http.createServer(app);
