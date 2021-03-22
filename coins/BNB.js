@@ -68,7 +68,8 @@ export default async () => {
                             formattedBalance,
                             ar[1].toString()
                         ]);
-                    } catch {
+                    } catch (e) {
+                        console.log(e);
                         web3.setProvider(new Web3.providers.WebsocketProvider(WSURL[Number(generateRandomBigInt(0n, BigInt(WSURL.length)))]));
                         getData(r)
                     }
