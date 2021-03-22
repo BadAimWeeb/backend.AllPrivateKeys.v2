@@ -1,17 +1,31 @@
 const MAX_PRIVATE_KEY = 0xfffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364140n;
-const WSURL = "wss://www.ethercluster.com/ws-etc";
+const WSURL = [
+    "https://bsc-dataseed1.binance.org/",
+    "https://bsc-dataseed2.binance.org/",
+    "https://bsc-dataseed3.binance.org/",
+    "https://bsc-dataseed4.binance.org/",
+    "https://bsc-dataseed1.defibit.io/",
+    "https://bsc-dataseed2.defibit.io/",
+    "https://bsc-dataseed3.defibit.io/",
+    "https://bsc-dataseed4.defibit.io/",
+    "https://bsc-dataseed1.ninicoin.io/",
+    "https://bsc-dataseed2.ninicoin.io/",
+    "https://bsc-dataseed3.ninicoin.io/",
+    "https://bsc-dataseed4.ninicoin.io/"
+];
 
 import Web3, { providers } from "web3";
 let web3 = new Web3();
 
-web3.setProvider(new providers.WebsocketProvider(WSURL));
-
 import { generateRandomBigInt } from "./support";
+import { getAddressFromPrivateKey } from "./support/BNB";  
+
+web3.setProvider(new providers.WebsocketProvider(WSURL[Number(generateRandomBigInt(0n, BigInt(WSURL.length)))]));
 
 export default async () => {
     return {
-        short: "ETC",
-        name: "Ethereum\xA0Classic",
+        short: "BNB",
+        name: "Binance",
         pageHandler: async (page, count) => {
             if (count > 100 || count <= 0) return null;
 
@@ -29,8 +43,7 @@ export default async () => {
                 if (private > MAX_PRIVATE_KEY) break;
                 let privateString = private.toString(16).padStart(64, "0");
 
-                let account = web3.eth.accounts.privateKeyToAccount(privateString);
-                let address = account.address;
+                let address = getAddressFromPrivateKey(privateString);
 
                 rows.push(new Promise(async function getData(r) {
                     try {
@@ -51,12 +64,12 @@ export default async () => {
                         r([
                             (i + 1) + ".",
                             privateString,
-                            `<a href="https://etcblockexplorer.com/address/${address}" target="_blank">${address}</a>`,
+                            `<a href="https://www.bscscan.com/address/${address}" target="_blank">${address}</a>`,
                             formattedBalance,
                             ar[1].toString()
                         ]);
                     } catch {
-                        web3.setProvider(new Web3.providers.WebsocketProvider(WSURL));
+                        web3.setProvider(new providers.WebsocketProvider(WSURL[Number(generateRandomBigInt(0n, BigInt(WSURL.length)))]));
                         getData(r)
                     }
                 }));

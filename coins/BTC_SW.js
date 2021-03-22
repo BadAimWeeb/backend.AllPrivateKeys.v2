@@ -1,30 +1,10 @@
 const MAX_PRIVATE_KEY = 0xfffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364140n;
-const BTC = require("bitcoinjs-lib");
-const fetch = require("node-fetch");
+import BTC from "bitcoinjs-lib";
+import fetch from "node-fetch";
 
-/** Generates BigInts between low (inclusive) and high (exclusive) */
-function generateRandomBigInt(lowBigInt, highBigInt) {
-    if (lowBigInt >= highBigInt) {
-        throw new Error('lowBigInt must be smaller than highBigInt');
-    }
+import { generateRandomBigInt } from "./support";
 
-    const difference = highBigInt - lowBigInt;
-    const differenceLength = difference.toString().length;
-    let multiplier = '';
-    while (multiplier.length < differenceLength) {
-        multiplier += Math.random()
-            .toString()
-            .split('.')[1];
-    }
-    multiplier = multiplier.slice(0, differenceLength);
-    const divisor = '1' + '0'.repeat(differenceLength);
-
-    const randomDifference = (difference * BigInt(multiplier)) / BigInt(divisor);
-
-    return lowBigInt + randomDifference;
-}
-
-module.exports = async () => {
+export default async () => {
     return {
         short: "BTC_SW",
         name: "Bitcoin\xA0(SegWit)",

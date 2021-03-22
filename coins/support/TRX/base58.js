@@ -6,7 +6,7 @@ const ALPHABET_MAP = ALPHABET.split('').reduce((acc, x, i) => {
 
 const BASE = 58
 
-const encode58 = (buffer) => {
+export const encode58 = (buffer) => {
     if (buffer.length === 0) return ''
 
     const digits = [0]
@@ -37,7 +37,7 @@ const encode58 = (buffer) => {
         .join('')
 }
 
-const decode58 = (data) => {
+export const decode58 = (data) => {
     if (data.length === 0) return Buffer.from([])
 
     const bytes = [0]
@@ -67,9 +67,4 @@ const decode58 = (data) => {
     for (let i = 0; data[i] === '1' && i < data.length - 1; i++) bytes.push(0)
 
     return Buffer.from(bytes.reverse())
-}
-
-module.exports = {
-    encode58,
-    decode58
 }
