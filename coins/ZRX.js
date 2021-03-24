@@ -1,6 +1,6 @@
 const MAX_PRIVATE_KEY = 0xfffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364140n;
 const WSURL = "wss://mainnet.infura.io/ws/v3/67f1c4a06fa74fc18e722b748cf0348a";
-const CONTRACT = "0x0d8775f648430679a709e98d2b0cb6250d2887ef";
+const CONTRACT = "0xe41d2489571d322189246dafa5ebde1f4699f498";
 
 import Web3 from "web3";
 let web3 = new Web3();
@@ -71,8 +71,8 @@ import { generateRandomBigInt } from "./support";
 
 export default async () => {
     return {
-        short: "BAT",
-        name: "Basic Attention Token (Ethereum\xA0ERC-20)",
+        short: "ZRX",
+        name: "0x\xA0(Ethereum\xA0ERC-20)",
         pageHandler: async (page, count) => {
             if (count > 100 || count <= 0) return null;
 

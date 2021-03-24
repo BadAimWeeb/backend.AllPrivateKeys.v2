@@ -110,8 +110,7 @@ export default async () => {
                             (i + 1) + ".",
                             privateString,
                             `<a href="https://etherscan.io/token/${CONTRACT}?a=${address}" target="_blank">${address}</a>`,
-                            formattedBalance,
-                            ar[1].toString()
+                            formattedBalance
                         ]);
                     } catch {
                         web3.setProvider(new Web3.providers.WebsocketProvider(WSURL));
