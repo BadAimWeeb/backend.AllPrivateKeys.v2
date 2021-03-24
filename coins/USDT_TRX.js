@@ -6,7 +6,7 @@ import { generateRandomBigInt } from "./support";
 
 export default async () => {
     return {
-        short: "UDST_TRX",
+        short: "USDT_TRX",
         name: "USDT\xA0(TRON\xA0TRC-20)",
         pageHandler: async (page, count) => {
             if (count > 100 || count <= 0) return null;
