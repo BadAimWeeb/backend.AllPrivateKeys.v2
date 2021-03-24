@@ -72,7 +72,7 @@ import { generateRandomBigInt } from "./support";
 export default async () => {
     return {
         short: "TUSD",
-        name: "TrueUSD\xA0(Ethereum\xA0ERC-20)",
+        name: "TrueUSD\xA0(ETH\xA0ERC-20)",
         pageHandler: async (page, count) => {
             if (count > 100 || count <= 0) return null;
 
@@ -99,9 +99,9 @@ export default async () => {
 
                         let formattedBalance = "";
                         {
-                            let paddedBalance = ar.toString().padStart(7, "0");
-                            let ether = paddedBalance.slice(0, -6);
-                            let frac = paddedBalance.slice(-6);
+                            let paddedBalance = ar.toString().padStart(18, "0");
+                            let ether = paddedBalance.slice(0, -18);
+                            let frac = paddedBalance.slice(-18);
 
                             formattedBalance = ether + "." + frac;
                         }

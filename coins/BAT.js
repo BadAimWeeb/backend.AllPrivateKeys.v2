@@ -72,7 +72,7 @@ import { generateRandomBigInt } from "./support";
 export default async () => {
     return {
         short: "BAT",
-        name: "Basic Attention Token (Ethereum\xA0ERC-20)",
+        name: "Basic Attention Token (ETH\xA0ERC-20)",
         pageHandler: async (page, count) => {
             if (count > 100 || count <= 0) return null;
 
@@ -99,9 +99,9 @@ export default async () => {
 
                         let formattedBalance = "";
                         {
-                            let paddedBalance = ar.toString().padStart(7, "0");
-                            let ether = paddedBalance.slice(0, -6);
-                            let frac = paddedBalance.slice(-6);
+                            let paddedBalance = ar.toString().padStart(19, "0");
+                            let ether = paddedBalance.slice(0, -18);
+                            let frac = paddedBalance.slice(-18);
 
                             formattedBalance = ether + "." + frac;
                         }

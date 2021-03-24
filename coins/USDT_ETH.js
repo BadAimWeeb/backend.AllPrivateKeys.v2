@@ -72,7 +72,7 @@ import { generateRandomBigInt } from "./support";
 export default async () => {
     return {
         short: "USDT_ETH",
-        name: "USDT\xA0(Ethereum\xA0ERC-20)",
+        name: "USDT\xA0(ETH\xA0ERC-20)",
         pageHandler: async (page, count) => {
             if (count > 100 || count <= 0) return null;
 
