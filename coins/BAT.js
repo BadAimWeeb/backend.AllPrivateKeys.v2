@@ -72,7 +72,7 @@ import { generateRandomBigInt } from "./support";
 export default async () => {
     return {
         short: "BAT",
-        name: "Basic Attention Token (ETH\xA0ERC-20)",
+        name: "BAT (ETH\xA0ERC-20)",
         pageHandler: async (page, count) => {
             if (count > 100 || count <= 0) return null;
 
