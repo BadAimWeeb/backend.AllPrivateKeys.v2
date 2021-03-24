@@ -27,7 +27,7 @@
 
     app.get("/", (req, res) => {
         res.status(200).setHeader("Access-Control-Allow-Origin", "*");
-        return res.json("AllPrivateKeys v2 Resolver Service - i6.2");
+        return res.json("AllPrivateKeys v2 Resolver Service - i6.3");
     });
 
     const server = http.createServer(app);
