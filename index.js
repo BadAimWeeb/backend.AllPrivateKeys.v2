@@ -1,5 +1,5 @@
 import thisPkg from "./package.json";
-import io from "socket.io";
+import * as io from "socket.io";
 import express from "express";
 import http from "http";
 import semver from "semver";
