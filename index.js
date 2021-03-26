@@ -1,10 +1,14 @@
+import thisPkg from "./package.json";
+import { io } from "socket.io";
+import express from "express";
+import http from "http";
+import semver from "semver";
+
 (async () => {
+    let thisPkgVersion = semver.parse(thisPkg.version);
+
     process.on("uncaughtException", console.log);
     process.on("unhandledRejection", console.log);
-
-    const io = await import("socket.io");
-    const express = (await import("express")).default;
-    const http = (await import("http")).default;
 
     const supportedCoins = await Promise.all(
         ["BTC", "BTC_SW", "ETH", "ETC", "DOGE", "DOGE_SW", "BNB", "TRX", "USDT_TRX", "USDT_ETH", "TUSD", "USDC", "BAT", "ZRX"]
@@ -27,7 +31,7 @@
 
     app.get("/", (req, res) => {
         res.status(200).setHeader("Access-Control-Allow-Origin", "*");
-        return res.json("AllPrivateKeys v2 Resolver Service - i6.3");
+        return res.json(`AllPrivateKeys v2 Resolver Service - i${thisPkgVersion.minor}${thisPkgVersion.patch ? "." + thisPkgVersion.patch : ""}`);
     });
 
     const server = http.createServer(app);
@@ -62,6 +66,11 @@
                                 ack(await supportedCoins.find(x => x.short === data[0]).pageHandler(data[1], data[2]));
                             } else ack(null);
                             break;
+                        case "service_version":
+                            ack({
+                                iter: thisPkgVersion.minor,
+                                patch: thisPkgVersion.patch
+                            }); break;
                         default:
                             ack(null);
                     }

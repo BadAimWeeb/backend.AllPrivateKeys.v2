@@ -13,19 +13,79 @@ const WSURL = [
     "https://bsc-dataseed3.ninicoin.io/",
     "https://bsc-dataseed4.ninicoin.io/"
 ];
+const CONTRACT = "0x55d398326f99059ff775485246999027b3197955";
 
 import Web3 from "web3";
 let web3 = new Web3();
 
 import { generateRandomBigInt } from "./support";
-// import { getAddressFromPrivateKey } from "./support/BNB";  
+
+var tokenContract = new web3.eth.Contract([
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "name",
+        "outputs": [
+            {
+                "name": "",
+                "type": "string"
+            }
+        ],
+        "payable": false,
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "decimals",
+        "outputs": [
+            {
+                "name": "",
+                "type": "uint8"
+            }
+        ],
+        "payable": false,
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [
+            {
+                "name": "_owner",
+                "type": "address"
+            }
+        ],
+        "name": "balanceOf",
+        "outputs": [
+            {
+                "name": "balance",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "symbol",
+        "outputs": [
+            {
+                "name": "",
+                "type": "string"
+            }
+        ],
+        "payable": false,
+        "type": "function"
+    }
+], CONTRACT);
 
 web3.setProvider(new Web3.providers.HttpProvider(WSURL[Number(generateRandomBigInt(0n, BigInt(WSURL.length)))]));
 
 export default async () => {
     return {
-        short: "BNB",
-        name: "Binance",
+        short: "BUSD-T",
+        name: "BUSD-T\xA0(BNB\xA0BEP-20)",
         pageHandler: async (page, count) => {
             if (count > 100 || count <= 0) return null;
 
@@ -49,16 +109,13 @@ export default async () => {
 
                 rows.push(new Promise(async function getData(r) {
                     try {
-                        let ar = await Promise.all([
-                            web3.eth.getBalance(address),
-                            web3.eth.getTransactionCount(address)
-                        ]);
+                        let ar = await tokenContract.methods.balanceOf(address).call();
 
                         let formattedBalance = "";
                         {
-                            let paddedBalance = ar[0].padStart(19, "0");
-                            let ether = paddedBalance.slice(0, -18);
-                            let frac = paddedBalance.slice(-18);
+                            let paddedBalance = ar[0].padStart(7, "0");
+                            let ether = paddedBalance.slice(0, -6);
+                            let frac = paddedBalance.slice(-6)
 
                             formattedBalance = ether + "." + frac;
                         }
@@ -66,11 +123,10 @@ export default async () => {
                         r([
                             (i + 1) + ".",
                             privateString,
-                            `<a href="https://www.bscscan.com/address/${address}" target="_blank">${address}</a>`,
-                            formattedBalance,
-                            ar[1].toString()
+                            `<a href="https://www.bscscan.com/token/${CONTRACT}?a=${address}" target="_blank">${address}</a>`,
+                            formattedBalance
                         ]);
-                    } catch {
+                    } catch (e) {
                         web3.setProvider(new Web3.providers.HttpProvider(WSURL[Number(generateRandomBigInt(0n, BigInt(WSURL.length)))]));
                         getData(r)
                     }
@@ -82,8 +138,7 @@ export default async () => {
                     "No.",
                     "Private key",
                     "Address",
-                    "Balance",
-                    "TX.n"
+                    "Balance"
                 ],
                 rows: await Promise.all(rows),
                 page: p.toString(),
