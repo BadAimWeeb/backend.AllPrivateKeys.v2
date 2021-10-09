@@ -11,7 +11,7 @@ import semver from "semver";
     process.on("unhandledRejection", console.log);
 
     const supportedCoins = await Promise.all(
-        ["BTC", "BTC_SW", "ETH", "ETC", "DOGE", "DOGE_SW", "BNB", "TRX", "USDT_TRX", "USDT_ETH", "BUSD-T_BNB", "TUSD", "USDC", "BAT", "ZRX"]
+        ["BTC", "BTC_SW", "ETH", "ETC", "DOGE", "DOGE_SW", "BNB", "TRX", "USDT_TRX", "USDT_ETH", "BUSD-T_BNB", "TUSD", "USDC", "BAT", "ZRX", "SOL", "CAKE"]
             .map(async x => await (await import(`./coins/${x}.js`)).default())
     );
 

@@ -1,10 +1,10 @@
 const MAX_PRIVATE_KEY = 0xfffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364140n;
-const WSURL = "wss://mainnet.infura.io/ws/v3/67f1c4a06fa74fc18e722b748cf0348a";
+const HTTPURL = "https://cloudflare-eth.com/";
 
 import Web3 from "web3";
 let web3 = new Web3();
 
-web3.setProvider(new Web3.providers.WebsocketProvider(WSURL));
+web3.setProvider(new Web3.providers.HttpProvider(HTTPURL));
 
 import { generateRandomBigInt } from "./support";
 
