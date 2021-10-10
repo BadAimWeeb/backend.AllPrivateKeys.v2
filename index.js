@@ -14,7 +14,7 @@ import semver from "semver";
         [
             "BTC", "BTC_SW", "ETH", "ETC", "DOGE", "DOGE_SW", "BNB", 
             "TRX", "USDT_TRX", "USDT_ETH", "BUSD-T_BNB", "TUSD", "USDC", 
-            "BAT", "ZRX", "SOL", "CAKE", "DOT"
+            "BAT", "ZRX", "SOL", "CAKE", "DOT", "UNI", "AXS", "SHIB"
         ]
             .map(async x => await (await import(`./coins/${x}.js`)).default())
     );
