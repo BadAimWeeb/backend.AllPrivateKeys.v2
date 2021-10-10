@@ -57,20 +57,15 @@ export default async () => {
                 );
 
                 rows.push(new Promise(async function getData(r) {
-                    try {
-                        let balance = await solanaConnection.getBalance(keyPair.publicKey);
-                        let address = keyPair.publicKey.toString();
+                    let balance = await solanaConnection.getBalance(keyPair.publicKey);
+                    let address = keyPair.publicKey.toString();
 
-                        r([
-                            (i + 1) + ".",
-                            "[" + keyPair.secretKey.toString() + "]",
-                            `<a href="https://explorer.solana.com/address/${address}" target="_blank">${address}</a>`,
-                            balance.toFixed(9)
-                        ]);
-                    } catch {
-                        web3.setProvider(new Web3.providers.WebsocketProvider(WSURL));
-                        getData(r)
-                    }
+                    r([
+                        (i + 1) + ".",
+                        "[" + keyPair.secretKey.toString() + "]",
+                        `<a href="https://explorer.solana.com/address/${address}" target="_blank">${address}</a>`,
+                        balance.toFixed(9)
+                    ]);
                 }));
             }
 
