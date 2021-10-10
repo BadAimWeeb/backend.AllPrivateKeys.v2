@@ -71,8 +71,8 @@ import { generateRandomBigInt } from "./support";
 
 export default async () => {
     return {
-        short: "UNI",
-        name: "Shiba Inu\xA0(ETH\xA0ERC-20)",
+        short: "SHIB",
+        name: "Shiba\xA0Inu\xA0(ETH\xA0ERC-20)",
         pageHandler: async (page, count) => {
             if (count > 100 || count <= 0) return null;
 
