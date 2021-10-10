@@ -16,79 +16,74 @@ export default async () => {
         short: "SOL",
         name: "Solana",
         pageHandler: async (page, count) => {
-            try {
-                if (count > 100 || count <= 0) return null;
+            if (count > 100 || count <= 0) return null;
 
-                let p;
-                let xp = (MAX_PRIVATE_KEY / BigInt(count));
-                if (xp * BigInt(count) < MAX_PRIVATE_KEY) xp += 1n;
+            let p;
+            let xp = (MAX_PRIVATE_KEY / BigInt(count));
+            if (xp * BigInt(count) < MAX_PRIVATE_KEY) xp += 1n;
 
-                if (!isNaN(parseFloat(page))) {
-                    p = BigInt(page);
+            if (!isNaN(parseFloat(page))) {
+                p = BigInt(page);
 
-                    if (p <= 0n || p > xp) {
-                        p = generateRandomBigInt(1n, (MAX_PRIVATE_KEY / BigInt(count)));
-                    }
-                } else {
+                if (p <= 0n || p > xp) {
                     p = generateRandomBigInt(1n, (MAX_PRIVATE_KEY / BigInt(count)));
                 }
+            } else {
+                p = generateRandomBigInt(1n, (MAX_PRIVATE_KEY / BigInt(count)));
+            }
 
-                let rows = [];
+            let rows = [];
 
-                for (let i = 0; i < count; i++) {
-                    let privateKey = ((p - 1n) * BigInt(count)) + 1n + BigInt(i);
-                    if (privateKey > MAX_PRIVATE_KEY) break;
-                    let privateByte = Uint8Array.from(
-                        privateKey
-                            .toString(16)
-                            .padStart(64, "0")
-                            .match(/[0-9a-fA-F]{2}/g)
-                            .map(x => parseInt(x, 16))
-                    );
+            for (let i = 0; i < count; i++) {
+                let privateKey = ((p - 1n) * BigInt(count)) + 1n + BigInt(i);
+                if (privateKey > MAX_PRIVATE_KEY) break;
+                let privateByte = Uint8Array.from(
+                    privateKey
+                        .toString(16)
+                        .padStart(64, "0")
+                        .match(/[0-9a-fA-F]{2}/g)
+                        .map(x => parseInt(x, 16))
+                );
 
-                    // TweetNaCl requires 64-byte secret key (what?), which is 32-byte private key
-                    // joined with 32-byte public key.
-                    let publicByte = await ed25519.getPublicKey(privateByte);
+                // TweetNaCl requires 64-byte secret key (what?), which is 32-byte private key
+                // joined with 32-byte public key.
+                let publicByte = await ed25519.getPublicKey(privateByte);
 
-                    let keyPair = solanaWeb3.Keypair.fromSecretKey(
-                        Uint8Array.from([
-                            ...privateByte,
-                            ...publicByte
-                        ])
-                    );
+                let keyPair = solanaWeb3.Keypair.fromSecretKey(
+                    Uint8Array.from([
+                        ...privateByte,
+                        ...publicByte
+                    ])
+                );
 
-                    rows.push(new Promise(async function getData(r) {
-                        try {
-                            let balance = await solanaConnection.getBalance(keyPair.publicKey);
-                            let address = keyPair.publicKey.toString();
+                rows.push(new Promise(async function getData(r) {
+                    try {
+                        let balance = await solanaConnection.getBalance(keyPair.publicKey);
+                        let address = keyPair.publicKey.toString();
 
-                            r([
-                                (i + 1) + ".",
-                                "[" + keyPair.secretKey.toString() + "]",
-                                `<a href="https://explorer.solana.com/address/${address}" target="_blank">${address}</a>`,
-                                balance.toFixed(9)
-                            ]);
-                        } catch {
-                            web3.setProvider(new Web3.providers.WebsocketProvider(WSURL));
-                            getData(r)
-                        }
-                    }));
-                }
+                        r([
+                            (i + 1) + ".",
+                            "[" + keyPair.secretKey.toString() + "]",
+                            `<a href="https://explorer.solana.com/address/${address}" target="_blank">${address}</a>`,
+                            balance.toFixed(9)
+                        ]);
+                    } catch {
+                        web3.setProvider(new Web3.providers.WebsocketProvider(WSURL));
+                        getData(r)
+                    }
+                }));
+            }
 
-                return {
-                    header: [
-                        "No.",
-                        "Private key",
-                        "Address",
-                        "Balance"
-                    ],
-                    rows: await Promise.all(rows),
-                    page: p.toString(),
-                    maxPage: xp.toString()
-                }
-            } catch (e) {
-                console.log(e);
-                throw e;
+            return {
+                header: [
+                    "No.",
+                    "Private key",
+                    "Address",
+                    "Balance"
+                ],
+                rows: await Promise.all(rows),
+                page: p.toString(),
+                maxPage: xp.toString()
             }
         }
     }

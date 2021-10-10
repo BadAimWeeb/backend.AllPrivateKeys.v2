@@ -76,14 +76,21 @@ export default async () => {
         pageHandler: async (page, count) => {
             if (count > 100 || count <= 0) return null;
 
-            let p = BigInt(page);
-            let rows = [];
+            let p;
             let xp = (MAX_PRIVATE_KEY / BigInt(count));
             if (xp * BigInt(count) < MAX_PRIVATE_KEY) xp += 1n;
 
-            if (p <= 0n || p > xp) {
+            if (!isNaN(parseFloat(page))) {
+                p = BigInt(page);
+
+                if (p <= 0n || p > xp) {
+                    p = generateRandomBigInt(1n, (MAX_PRIVATE_KEY / BigInt(count)));
+                }
+            } else {
                 p = generateRandomBigInt(1n, (MAX_PRIVATE_KEY / BigInt(count)));
             }
+
+            let rows = [];
 
             for (let i = 0; i < count; i++) {
                 let privateKey = ((p - 1n) * BigInt(count)) + 1n + BigInt(i);

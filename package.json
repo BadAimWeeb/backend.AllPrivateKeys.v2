@@ -1,6 +1,6 @@
 {
   "name": "apkeyserverv2",
-  "version": "2.8.0",
+  "version": "2.8.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@solana/web3.js": "^1.29.2",
-    "bech32": "^1.1.4",
+    "bech32": "^2.0.0",
     "bitcoinjs-lib": "^5.2.0",
     "crypto-js": "^4.0.0",
     "elliptic": "^6.5.4",
