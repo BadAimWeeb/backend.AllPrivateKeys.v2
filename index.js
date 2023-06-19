@@ -1,4 +1,5 @@
-import thisPkg from "./package.json";
+// temporary fix
+import thisPkg from "./package.json" assert { type: "json" };
 import * as io from "socket.io";
 import express from "express";
 import http from "http";

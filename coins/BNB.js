@@ -14,7 +14,7 @@ const WSURL = [
     "https://bsc-dataseed4.ninicoin.io/"
 ];
 
-import Web3 from "web3";
+import { Web3 } from "web3";
 let web3 = new Web3();
 
 import { generateRandomBigInt } from "./support";

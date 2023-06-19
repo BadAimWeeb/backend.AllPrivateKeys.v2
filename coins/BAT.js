@@ -2,7 +2,7 @@ const MAX_PRIVATE_KEY = 0xfffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e
 const WSURL = "wss://mainnet.infura.io/ws/v3/67f1c4a06fa74fc18e722b748cf0348a";
 const CONTRACT = "0x0d8775f648430679a709e98d2b0cb6250d2887ef";
 
-import Web3 from "web3";
+import { Web3 } from "web3";
 let web3 = new Web3();
 
 var tokenContract = new web3.eth.Contract([
