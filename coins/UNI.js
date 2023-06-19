@@ -67,7 +67,7 @@ var tokenContract = new web3.eth.Contract([
 
 web3.setProvider(new Web3.providers.WebsocketProvider(WSURL));
 
-import { generateRandomBigInt } from "./support";
+import { generateRandomBigInt } from "./support/index.js";
 
 export default async () => {
     return {

@@ -18,7 +18,7 @@ const CONTRACT = "0x55d398326f99059ff775485246999027b3197955";
 import { Web3 } from "web3";
 let web3 = new Web3();
 
-import { generateRandomBigInt } from "./support";
+import { generateRandomBigInt } from "./support/index.js";
 
 var tokenContract = new web3.eth.Contract([
     {

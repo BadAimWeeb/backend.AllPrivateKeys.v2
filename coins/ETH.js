@@ -6,7 +6,7 @@ let web3 = new Web3();
 
 web3.setProvider(new Web3.providers.WebsocketProvider(WSURL));
 
-import { generateRandomBigInt } from "./support";
+import { generateRandomBigInt } from "./support/index.js";
 
 export default async () => {
     return {

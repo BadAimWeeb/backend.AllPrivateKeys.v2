@@ -2,7 +2,7 @@ const MAX_PRIVATE_KEY = 0xfffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e
 import BTC from "bitcoinjs-lib";
 import fetch from "node-fetch";
 
-import { generateRandomBigInt } from "./support";
+import { generateRandomBigInt } from "./support/index.js";
 
 export default async () => {
     return {

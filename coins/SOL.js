@@ -3,7 +3,7 @@ const MAX_PRIVATE_KEY = 0xfffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e
 import * as solanaWeb3 from '@solana/web3.js';
 import ed25519 from "noble-ed25519"
 
-import { generateRandomBigInt } from "./support";
+import { generateRandomBigInt } from "./support/index.js";
 
 export default async () => {
     let solanaConnection = new solanaWeb3.Connection(

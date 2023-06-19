@@ -4,7 +4,7 @@ const MAX_SEED = 0xfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
 import * as polkaUtil from "@polkadot/util-crypto";
 import { ApiPromise as polkaAPI, WsProvider } from '@polkadot/api';
 
-import { generateRandomBigInt } from "./support";
+import { generateRandomBigInt } from "./support/index.js";
 
 export default async () => {
     const wsProvider = new WsProvider('wss://rpc.polkadot.io');

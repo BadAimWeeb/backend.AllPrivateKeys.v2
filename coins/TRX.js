@@ -1,8 +1,8 @@
 const MAX_PRIVATE_KEY = 0xfffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364140n;
 import fetch from "node-fetch";
-import { getAddress } from "./support/TRX";
+import { getAddress } from "./support/TRX/index.js";
 
-import { generateRandomBigInt } from "./support";
+import { generateRandomBigInt } from "./support/index.js";
 
 export default async () => {
     return {

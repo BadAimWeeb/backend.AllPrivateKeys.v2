@@ -17,7 +17,7 @@ const WSURL = [
 import { Web3 } from "web3";
 let web3 = new Web3();
 
-import { generateRandomBigInt } from "./support";
+import { generateRandomBigInt } from "./support/index.js";
 // import { getAddressFromPrivateKey } from "./support/BNB";  
 
 web3.setProvider(new Web3.providers.HttpProvider(WSURL[Number(generateRandomBigInt(0n, BigInt(WSURL.length)))]));
