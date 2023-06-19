@@ -14,13 +14,12 @@ const WSURL = [
     "https://bsc-dataseed4.ninicoin.io/"
 ];
 
-import { Web3, HttpProvider } from "web3";
-let web3 = new Web3();
-
 import { generateRandomBigInt } from "./support/index.js";
-// import { getAddressFromPrivateKey } from "./support/BNB";  
 
-web3.setProvider(new HttpProvider(WSURL[Number(generateRandomBigInt(0n, BigInt(WSURL.length)))]));
+import { Web3, HttpProvider } from "web3";
+let web3 = new Web3(new HttpProvider(WSURL[Number(generateRandomBigInt(0n, BigInt(WSURL.length)))]));
+
+// import { getAddressFromPrivateKey } from "./support/BNB";  
 
 export default async () => {
     return {

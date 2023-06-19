@@ -2,9 +2,7 @@ const MAX_PRIVATE_KEY = 0xfffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e
 const WSURL = "wss://www.ethercluster.com/ws-etc";
 
 import { Web3, WebSocketProvider } from "web3";
-let web3 = new Web3();
-
-web3.setProvider(new WebSocketProvider(WSURL));
+let web3 = new Web3(new WebSocketProvider(WSURL));
 
 import { generateRandomBigInt } from "./support/index.js";
 

@@ -3,7 +3,7 @@ const WSURL = "wss://mainnet.infura.io/ws/v3/67f1c4a06fa74fc18e722b748cf0348a";
 const CONTRACT = "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48";
 
 import { Web3, WebSocketProvider } from "web3";
-let web3 = new Web3();
+let web3 = new Web3(new WebSocketProvider(WSURL));
 
 var tokenContract = new web3.eth.Contract([
     {
@@ -64,8 +64,6 @@ var tokenContract = new web3.eth.Contract([
         "type": "function"
     }
 ], CONTRACT);
-
-web3.setProvider(new WebSocketProvider(WSURL));
 
 import { generateRandomBigInt } from "./support/index.js";
 
