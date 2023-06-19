@@ -118,7 +118,7 @@ export default async () => {
 
                         let formattedBalance = "";
                         {
-                            let paddedBalance = ar[0].padStart(7, "0");
+                            let paddedBalance = ar[0].toString().padStart(7, "0");
                             let ether = paddedBalance.slice(0, -6);
                             let frac = paddedBalance.slice(-6)
 
