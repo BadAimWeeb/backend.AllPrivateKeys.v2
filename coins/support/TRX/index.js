@@ -1,7 +1,7 @@
 import crypto from "crypto";
 import sha3 from "js-sha3";
 const { keccak_256 } = sha3;
-import { encode58 } from "./base58";
+import { encode58 } from "./base58.js";
 
 const ADDRESS_PREFIX = '41'
 
