@@ -50,7 +50,7 @@ export default async () => {
                 let privateString = privateKey.toString(16).padStart(64, "0");
 
                 //let address = getAddressFromPrivateKey(privateString);
-                let account = web3.eth.accounts.privateKeyToAccount(privateString);
+                let account = web3.eth.accounts.privateKeyToAccount("0x" + privateString);
                 let address = account.address;
 
                 rows.push(new Promise(async function getData(r) {
