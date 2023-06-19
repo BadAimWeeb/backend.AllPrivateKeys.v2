@@ -1,10 +1,10 @@
 const MAX_PRIVATE_KEY = 0xfffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364140n;
 const WSURL = "wss://www.ethercluster.com/ws-etc";
 
-import { Web3 } from "web3";
+import { Web3, WebSocketProvider } from "web3";
 let web3 = new Web3();
 
-web3.setProvider(new Web3.providers.WebsocketProvider(WSURL));
+web3.setProvider(new WebSocketProvider(WSURL));
 
 import { generateRandomBigInt } from "./support/index.js";
 
@@ -63,7 +63,6 @@ export default async () => {
                             ar[1].toString()
                         ]);
                     } catch {
-                        web3.setProvider(new Web3.providers.WebsocketProvider(WSURL));
                         getData(r)
                     }
                 }));

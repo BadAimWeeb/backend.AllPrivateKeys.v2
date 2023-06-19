@@ -15,7 +15,7 @@ const WSURL = [
 ];
 const CONTRACT = "0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82";
 
-import { Web3 } from "web3";
+import { Web3, HttpProvider } from "web3";
 let web3 = new Web3();
 
 import { generateRandomBigInt } from "./support/index.js";
@@ -80,7 +80,7 @@ var tokenContract = new web3.eth.Contract([
     }
 ], CONTRACT);
 
-web3.setProvider(new Web3.providers.HttpProvider(WSURL[Number(generateRandomBigInt(0n, BigInt(WSURL.length)))]));
+web3.setProvider(new HttpProvider(WSURL[Number(generateRandomBigInt(0n, BigInt(WSURL.length)))]));
 
 export default async () => {
     return {
@@ -134,7 +134,7 @@ export default async () => {
                             formattedBalance
                         ]);
                     } catch (e) {
-                        web3.setProvider(new Web3.providers.HttpProvider(WSURL[Number(generateRandomBigInt(0n, BigInt(WSURL.length)))]));
+                        web3.setProvider(new HttpProvider(WSURL[Number(generateRandomBigInt(0n, BigInt(WSURL.length)))]));
                         getData(r)
                     }
                 }));

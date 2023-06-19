@@ -2,7 +2,7 @@ const MAX_PRIVATE_KEY = 0xfffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e
 const WSURL = "wss://mainnet.infura.io/ws/v3/67f1c4a06fa74fc18e722b748cf0348a";
 const CONTRACT = "0xe41d2489571d322189246dafa5ebde1f4699f498";
 
-import { Web3 } from "web3";
+import { Web3, WebSocketProvider } from "web3";
 let web3 = new Web3();
 
 var tokenContract = new web3.eth.Contract([
@@ -65,7 +65,7 @@ var tokenContract = new web3.eth.Contract([
     }
 ], CONTRACT);
 
-web3.setProvider(new Web3.providers.WebsocketProvider(WSURL));
+web3.setProvider(new WebSocketProvider(WSURL));
 
 import { generateRandomBigInt } from "./support/index.js";
 
@@ -120,7 +120,7 @@ export default async () => {
                             formattedBalance
                         ]);
                     } catch {
-                        web3.setProvider(new Web3.providers.WebsocketProvider(WSURL));
+                        web3.setProvider(new WebSocketProvider(WSURL));
                         getData(r)
                     }
                 }));
